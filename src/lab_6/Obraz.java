@@ -40,7 +40,14 @@ public class Obraz {
 
     }
 
-    public synchronized void calculate_histogram(int character) {
+    public void calculate_histogram(int character) {
+
+        int[] histogram = new int[Main.CHARACTERS_NUMBER];
+
+        for (int i = 0; i < Main.CHARACTERS_NUMBER; i++) {
+            histogram[i] = 0;
+
+        }
 
         for (int i = 0; i < size_n; i++) {
 
@@ -50,6 +57,16 @@ public class Obraz {
 
             }
 
+        }
+
+        update(histogram);
+
+    }
+
+    public synchronized void update(int[] histogram) {
+
+        for (int i = 0; i < Main.CHARACTERS_NUMBER; i++) {
+            this.histogram[i] += histogram[i];
         }
 
     }

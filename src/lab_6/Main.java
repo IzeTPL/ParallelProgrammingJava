@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static final int CHARACTERS_NUMBER = 10;
+    public static final int CHARACTERS_NUMBER = 94;
     public static final int ASCII = 33;
 
     public static void main(String[] args) {
@@ -12,6 +12,8 @@ public class Main {
         //PUNKT A
 
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nPunkt 1a:");
 
         System.out.println("Set image size: n (#rows), m(#kolumns)");
         int n = scanner.nextInt();
@@ -39,6 +41,8 @@ public class Main {
         obraz.clear_histogram();
 
         //PUNKT B
+
+        System.out.println("\nPunkt 1b:");
 
         System.out.println("Set number of threads");
         int num_threads = scanner.nextInt();
@@ -85,7 +89,7 @@ public class Main {
 
         //PUNKT 2
 
-        System.out.println("Block\n");
+        System.out.println("\nPunkt 2 - kolumnowo:");
 
         Thread[] threads2 = new Thread[num_threads];
 
