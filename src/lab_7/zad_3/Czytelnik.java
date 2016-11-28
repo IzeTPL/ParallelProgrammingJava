@@ -1,7 +1,5 @@
 package lab_7.zad_3;
 
-import java.util.Random;
-
 /**
  * Created by Marian on 22.11.2016.
  */

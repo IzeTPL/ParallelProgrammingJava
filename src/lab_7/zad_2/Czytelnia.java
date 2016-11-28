@@ -1,9 +1,7 @@
 package lab_7.zad_2;
 
-import java.rmi.RemoteException;
 import java.util.Random;
 import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**

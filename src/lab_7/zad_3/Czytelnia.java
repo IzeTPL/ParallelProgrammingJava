@@ -1,8 +1,6 @@
 package lab_7.zad_3;
 
 import java.util.Random;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Marian on 22.11.2016.
