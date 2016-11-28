@@ -14,6 +14,8 @@ public class Czytelnia {
     private int liczba_czek_czyt;
     private int liczba_czek_pisz;
     private Random random;
+    private boolean barieraP;
+    private boolean barieraC;
 
 
     public Czytelnia() {
@@ -22,6 +24,8 @@ public class Czytelnia {
         liczba_czek_pisz = 0;
         liczba_czek_czyt = 0;
         random = new Random();
+        barieraC = false;
+        barieraP = false;
 
     }
 
@@ -35,20 +39,19 @@ public class Czytelnia {
                 }
             }
             liczba_czyt++;
-            notifyAll();
     }
 
 
     public synchronized void my_read_lock_unlock() {
             liczba_czyt--;
-            if (liczba_czyt == 0) {
-                notify();
-            }
+        if(liczba_czyt == 0) {
+            notifyAll();
+        }
     }
 
 
     public synchronized void my_write_lock_lock() {
-            if (liczba_czyt + liczba_pisz > 0) {
+            if ((liczba_czyt + liczba_pisz) > 0) {
                 try {
                     liczba_czek_pisz++;
                     wait();
@@ -62,20 +65,28 @@ public class Czytelnia {
 
     public synchronized void my_write_lock_unlock() {
             liczba_pisz--;
-            if (liczba_czek_czyt != 0) {
-                notify();
-            } else {
-                notify();
-            }
+        if(liczba_czek_czyt != 0) {
+            notifyAll();
+        }
     }
 
-    public void czytam() {
+    public int bariera() {
+        if(liczba_czek_czyt > 0) return 0;
+        else if(liczba_czek_pisz > 0) return 1;
+        else return 3;
+    }
+
+    public synchronized void czytam() {
+        System.out.println("Czytelnicy: " + liczba_czyt);
+        System.out.println("Pisarze: " + liczba_pisz);
         try {
             Thread.sleep(random.nextInt(1000));
         } catch (InterruptedException e) {}
     }
 
-    public void pisze() {
+    public synchronized void pisze() {
+        System.out.println("Czytelnicy: " + liczba_czyt);
+        System.out.println("Pisarze: " + liczba_pisz);
         try {
             Thread.sleep(random.nextInt(1000));
         } catch (InterruptedException e) {}

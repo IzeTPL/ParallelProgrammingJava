@@ -13,7 +13,8 @@ public class Main {
 
         for (int i = 0; i < 5; i++) {
 
-            pisarze[i] = new Thread(new Pisarz(czytelnia));
+            Klient klient = new Pisarz(czytelnia);
+            pisarze[i] = new Thread(klient);
             pisarze[i].setName(Integer.toString(i));
             pisarze[i].start();
 
@@ -21,7 +22,8 @@ public class Main {
 
         for (int i = 0; i < 5; i++) {
 
-            czytelnicy[i] = new Thread(new Czytelnik(czytelnia));
+            Klient klient = new Czytelnik(czytelnia);
+            czytelnicy[i] = new Thread(klient);
             czytelnicy[i].setName(Integer.toString(i));
             czytelnicy[i].start();
 

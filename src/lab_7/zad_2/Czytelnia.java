@@ -80,12 +80,16 @@ public class Czytelnia {
     }
 
     public void czytam() {
+        System.out.println("Czytelnicy: " + liczba_czyt);
+        System.out.println("Pisarze: " + liczba_pisz);
         try {
             Thread.sleep(random.nextInt(1000));
         } catch (InterruptedException e) {}
     }
 
     public void pisze() {
+        System.out.println("Czytelnicy: " + liczba_czyt);
+        System.out.println("Pisarze: " + liczba_pisz);
         try {
             Thread.sleep(random.nextInt(1000));
         } catch (InterruptedException e) {}

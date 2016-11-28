@@ -5,14 +5,10 @@ import java.util.Random;
 /**
  * Created by Marian on 22.11.2016.
  */
-public class Pisarz implements Runnable{
-
-    private Czytelnia czytelnia;
-    private Random random;
+public class Pisarz extends Klient{
 
     public Pisarz(Czytelnia czytelnia) {
-        this.czytelnia = czytelnia;
-        random = new Random();
+        super(czytelnia);
     }
 
     @Override
@@ -23,6 +19,8 @@ public class Pisarz implements Runnable{
             try {
                 Thread.sleep(random.nextInt(1000));
             } catch (InterruptedException e) {}
+
+            while(czytelnia.bariera() == 0) {}
 
             System.out.println("pisarz " + Thread.currentThread().getName() + " przed zamkiem\n");
 
