@@ -15,8 +15,9 @@ public class Main {
     private static final int NTHREADS = 10;
     private static final double XP = 0;
     private static final double XK = Math.PI;
-    private static final double DX = 0.00001;
-    private static final int N = (int) Math.ceil((XK-XP)/DX);
+    private static final double DX = 0.0000001;
+    private static final int N = 50;
+    private static final double NEWDX = (XK-XP)/N;
 
     public static void main(String[] args) {
 
@@ -25,11 +26,17 @@ public class Main {
         ExecutorService executor = Executors.newFixedThreadPool(NTHREADS);
         List<Future<Double>> list = new ArrayList<>();
 
+        double czas1 = System.currentTimeMillis();
         for (int i = 0; i < N; i++) {
-            Callable<Double> calkaCallable = new CalkaCallable(XP+(i*DX), XP + (i*DX + DX), DX);
+            Callable<Double> calkaCallable = new CalkaCallable(XP+(i*NEWDX), XP + (i*NEWDX + NEWDX), DX);
             Future<Double> future = executor.submit(calkaCallable);
             list.add(future);
         }
+
+        executor.shutdown();
+
+        while (!executor.isTerminated()) {}
+        double czas2 = System.currentTimeMillis();
 
         for(Future<Double> doubleFuture : list){
             try {
@@ -39,19 +46,7 @@ public class Main {
             }
         }
 
-        executor.shutdown();
-
-        // Wait until all threads finish
-        while (!executor.isTerminated()) {}
-
-        System.out.println("Wynik: " + calka);
-
-        CalkaCallable calkaSeq = new CalkaCallable(XP, XK, DX);
-        try {
-            calkaSeq.call();
-        } catch (Exception e) {
-
-        }
+        System.out.println("Wynik: " + calka + " czas: " + (czas2-czas1) + "ms");
 
     }
 

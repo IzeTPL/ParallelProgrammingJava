@@ -1,5 +1,7 @@
 package lab_8.zad_3;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 
@@ -22,15 +24,14 @@ public class Main {
 
         }
 
+        System.out.println(Arrays.toString(numbers));
+        System.out.println();
+
             DivideTask task = new DivideTask(numbers);
             ForkJoinPool forkJoinPool = new ForkJoinPool();
             numbers = forkJoinPool.invoke(task); // invoke waits for completion and returns results
 
-        for (int i = 0; i < numbers.length; i++) {
-
-            System.out.print(numbers[i] + " ");
-
-        }
+            System.out.println(Arrays.toString(numbers));
 
     }
 

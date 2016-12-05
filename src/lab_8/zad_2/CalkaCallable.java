@@ -39,7 +39,7 @@ public class CalkaCallable implements Callable<Double>{
     @Override
     public Double call() throws Exception {
         double calka = compute();
-        System.out.println("Calka czastkowa: " + calka);
+        //System.out.println("Calka czastkowa: " + calka);
         return calka;
     }
 
